@@ -18,3 +18,8 @@ export async function getCategories(): Promise<string[]> {
     const { data } = await api.get<string[]>('/products/category-list');
     return data;
 }
+
+export async function getProduct(id: number): Promise<Product> {
+    const { data } = await api.get<Product>(`/products/${id}`);
+    return data;
+}
