@@ -1,8 +1,9 @@
-import { getProducts } from '@/services/api';
+import { getCategories, getProducts } from '@/services/api';
 import { ProductList } from '@/components/product/ProductList';
 
 export default async function ProductsPage() {
     const products = await getProducts();
+    const categories = await getCategories();
 
     return (
         <main className="mx-auto max-w-7xl px-4 py-10">
@@ -10,7 +11,10 @@ export default async function ProductsPage() {
                 Products
             </h1>
 
-            <ProductList products={products} />
+            <ProductList 
+                products={products} 
+                categories={categories}
+            />
         </main>
     );
 }
