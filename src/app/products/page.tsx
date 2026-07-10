@@ -1,5 +1,5 @@
 import { getProducts } from '@/services/api';
-import { ProductGrid } from '@/components/product/ProductGrid';
+import { ProductList } from '@/components/product/ProductList';
 
 export default async function ProductsPage() {
     const products = await getProducts();
@@ -10,7 +10,7 @@ export default async function ProductsPage() {
                 Products
             </h1>
 
-            <ProductGrid products={products} />
+            <ProductList products={products} />
         </main>
     );
 }
