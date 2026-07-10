@@ -6,6 +6,7 @@ import { ProductGrid } from './ProductGrid';
 import { SearchBar } from '../filters/SearchBar';
 import { useDebounce } from '@/hooks/useDebounce';
 import { CategoryFilter } from '../filters/CategoryFilter';
+import { SortOption, SortSelect } from '../filters/SortSelect';
 
 interface ProductListProps {
     products: Product[];
@@ -18,10 +19,12 @@ export function ProductList({
 }: ProductListProps) {
     const [search, setSearch] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [sortBy, setSortBy] = useState<SortOption>('default');
+
     const debouncedSearch = useDebounce(search, 400);
 
     const filteredProducts = useMemo(() => {
-        return products.filter((product) => {
+        const filtered = products.filter((product) => {
             const matchesSearch = product
                 .title
                 .toLowerCase()
@@ -32,8 +35,28 @@ export function ProductList({
                 product.category === selectedCategory;
 
             return matchesSearch && matchesCategory;
-    });
-    }, [products, debouncedSearch, selectedCategory]);
+        });
+
+        switch (sortBy) {
+            case 'price-asc':
+                return [...filtered].sort((a, b) => a.price - b.price);
+            case 'price-desc':
+                return [...filtered].sort((a, b) => b.price - a.price);
+            case 'rating':
+                return [...filtered].sort((a, b) => b.rating - a.rating);
+            case 'title':
+                return [...filtered].sort((a, b) =>
+                    a.title.localeCompare(b.title)
+                );
+            default: 
+                return filtered;
+        }
+    }, [
+        products, 
+        debouncedSearch, 
+        selectedCategory, 
+        sortBy
+    ]);
 
     return (
         <>
@@ -41,6 +64,11 @@ export function ProductList({
                 <SearchBar 
                     value={search} 
                     onChange={setSearch} 
+                />
+
+                <SortSelect 
+                    value={sortBy}
+                    onChange={setSortBy}
                 />
             </div>
 
