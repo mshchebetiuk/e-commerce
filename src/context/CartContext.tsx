@@ -7,12 +7,16 @@ import {
     useState,
     ReactNode
 } from 'react';
+
 import { Product } from '@/types/product';
 import { CartItem } from '@/types/cart';
 
 interface CartContextType {
     cart: CartItem[];
     addToCart: (product: Product) => void;
+    removeFromCart: (id: number) => void;
+    increaseQuantity: (id: number) => void;
+    decreaseQuantity: (id: number) => void;
 }
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -49,8 +53,40 @@ export function CartProvider({
         });
     }   
 
+    function removeFromCart(id: number) {
+        setCart((prev) => prev.filter((item) => item.id !== id));
+    }
+
+    function increaseQuantity(id: number) {
+        setCart((prev) => 
+            prev.map((item) => 
+                item.id === id 
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            )
+        );
+    }
+
+    function decreaseQuantity(id: number) {
+        setCart((prev) => 
+            prev
+                .map((item) => 
+                    item.id === id 
+                        ? { ...item, quantity: item.quantity - 1 }
+                        : item
+                )
+                .filter((item) => item.quantity > 0)
+        );
+    }
+
     const value = useMemo(
-        () => ({ cart, addToCart }),
+        () => ({ 
+            cart, 
+            addToCart,
+            removeFromCart,
+            increaseQuantity,
+            decreaseQuantity,
+        }),
         [cart]
     );
 
