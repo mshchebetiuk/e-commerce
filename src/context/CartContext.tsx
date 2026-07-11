@@ -15,6 +15,7 @@ import { getStoredCart, saveCart } from '@/utils/storage';
 
 interface CartContextType {
     cart: CartItem[];
+    isLoaded: boolean;
     addToCart: (product: Product) => void;
     removeFromCart: (id: number) => void;
     increaseQuantity: (id: number) => void;
@@ -28,11 +29,18 @@ export function CartProvider({
 }: {
     children: ReactNode;
 }) {
-    const [cart, setCart] = useState<CartItem[]>(getStoredCart);
+    const [cart, setCart] = useState<CartItem[]>([]);
+    const [isLoaded, setIsLoaded] = useState(false);
     
     useEffect(() => {
+        if (!isLoaded) return;
         saveCart(cart);
-    }, [cart]);
+    }, [cart, isLoaded]);
+
+    useEffect(() => {
+        setCart(getStoredCart());
+        setIsLoaded(true);
+    }, []);
 
     function addToCart(product: Product) {
         setCart((prev) => {
@@ -88,12 +96,13 @@ export function CartProvider({
     const value = useMemo(
         () => ({ 
             cart, 
+            isLoaded,
             addToCart,
             removeFromCart,
             increaseQuantity,
             decreaseQuantity,
         }),
-        [cart]
+        [cart, isLoaded]
     );
 
     return (

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 
 export function Header() {
-    const { cart } = useCart();
+    const { cart, isLoaded } = useCart();
 
     const totalItems = cart.reduce(
         (sum, item) => sum + item.quantity, 0
@@ -21,7 +21,7 @@ export function Header() {
                     <Link href='/products' className='hover:text-gray-900'>Products</Link>
                     <Link href='/favorites' className='hover:text-gray-900'>Favorites</Link>
                     <Link href='/cart' className='hover:text-gray-900'>
-                        Cart ({totalItems})
+                        Cart ({isLoaded ? totalItems : 0})
                     </Link>
                 </nav>
             </div>
