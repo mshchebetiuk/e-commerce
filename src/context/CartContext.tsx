@@ -5,11 +5,13 @@ import {
     useContext,
     useMemo,
     useState,
+    useEffect,
     ReactNode
 } from 'react';
 
 import { Product } from '@/types/product';
 import { CartItem } from '@/types/cart';
+import { getStoredCart, saveCart } from '@/utils/storage';
 
 interface CartContextType {
     cart: CartItem[];
@@ -26,7 +28,11 @@ export function CartProvider({
 }: {
     children: ReactNode;
 }) {
-    const [cart, setCart] = useState<CartItem[]>([]);
+    const [cart, setCart] = useState<CartItem[]>(getStoredCart);
+    
+    useEffect(() => {
+        saveCart(cart);
+    }, [cart]);
 
     function addToCart(product: Product) {
         setCart((prev) => {
