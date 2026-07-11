@@ -1,4 +1,5 @@
 import { getProduct } from '@/services/api';
+import { AddToCartButton } from '@/components/product/AddToCartButton';
 
 interface ProductPageProps {
     params: Promise<{
@@ -42,9 +43,7 @@ export default async function ProductPage({
                         ${product.price}
                     </p>
 
-                    <button className="rounded-lg bg-gray-900 px-6 py-3 font-semibold text-white transition hover:bg-gray-700">
-                        Add to Cart
-                    </button>
+                    <AddToCartButton product={product} />
                 </div>
             </div>
         </main>

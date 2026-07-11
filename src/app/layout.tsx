@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { Header } from '@/components/layout/Header';
 import { Footer } from "@/components/layout/Footer";
+import { CartProvider } from "@/context/CartContext";
 
 import './globals.css';
 
@@ -19,9 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen bg-gray-50 text-gray-900">
         <div className="flex min-h-screen flex-col">
-          <Header />
-            <main className="flex-1">{children}</main>
-          <Footer />
+          <CartProvider>
+            <Header />
+              <main className="flex-1">{children}</main>
+            <Footer />
+          </CartProvider>
         </div>
       </body>
     </html>
