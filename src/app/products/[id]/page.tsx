@@ -1,4 +1,5 @@
 import { getProduct } from '@/services/api';
+import { FavoriteButton } from '@/components/product/FavoriteButton';
 import { AddToCartButton } from '@/components/product/AddToCartButton';
 
 interface ProductPageProps {
@@ -44,6 +45,10 @@ export default async function ProductPage({
                     </p>
 
                     <AddToCartButton product={product} />
+
+                    <div className="mt-4">
+                        <FavoriteButton product={product} />
+                    </div>
                 </div>
             </div>
         </main>
