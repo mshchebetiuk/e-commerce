@@ -19,7 +19,11 @@ export async function getCategories(): Promise<string[]> {
     return data;
 }
 
-export async function getProduct(id: number): Promise<Product> {
-    const { data } = await api.get<Product>(`/products/${id}`);
-    return data;
+export async function getProduct(id: number): Promise<Product | null> {
+    try {
+        const { data } = await api.get<Product>(`/products/${id}`);
+        return data;     
+    } catch {
+        return null;
+    }
 }

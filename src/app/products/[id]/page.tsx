@@ -1,6 +1,7 @@
 import { getProduct } from '@/services/api';
 import { FavoriteButton } from '@/components/product/FavoriteButton';
 import { AddToCartButton } from '@/components/product/AddToCartButton';
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
 interface ProductPageProps {
@@ -14,6 +15,8 @@ export default async function ProductPage({
 }: ProductPageProps) {
     const { id } = await params;
     const product = await getProduct(Number(id));
+
+    if (!product) notFound();
 
     return (
         <main className="mx-auto max-w-7xl px-4 py-12">
