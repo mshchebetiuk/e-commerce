@@ -1,6 +1,7 @@
 import { getProduct } from '@/services/api';
 import { FavoriteButton } from '@/components/product/FavoriteButton';
 import { AddToCartButton } from '@/components/product/AddToCartButton';
+import Image from 'next/image';
 
 interface ProductPageProps {
     params: Promise<{
@@ -17,11 +18,16 @@ export default async function ProductPage({
     return (
         <main className="mx-auto max-w-7xl px-4 py-12">
             <div className="grid gap-10 md:grid-cols-2">
-                <img 
-                    src={product.thumbnail} 
-                    alt={product.title}
-                    className='w-full rounded-xl'
-                />
+                <div className="relative aspect-square w-full">
+                    <Image 
+                        src={product.thumbnail}
+                        alt={product.title}
+                        fill
+                        className='rounded-xl object-cover'
+                        sizes='(max-width: 768px) 100vw, 50vw'
+                        priority
+                    />
+                </div>
 
                 <div>
                     <h1 className="mb-4 text-4xl font-bold">
