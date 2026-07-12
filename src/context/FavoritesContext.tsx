@@ -3,6 +3,7 @@
 import { 
     createContext,
     useContext,
+    useEffect,
     useMemo,
     useState,
     ReactNode,
@@ -10,13 +11,27 @@ import {
 
 import { Product } from '@/types/product';
 
+const FAVORITES_KEY = 'favorites';
+
 interface FavoritesContextType {
     favorites: Product[];
+    isLoaded: boolean;
     toggleFavorite: (product: Product) => void;
     isFavorite: (id: number) => boolean;
 }
 
 const FavoritesContext = createContext<FavoritesContextType | null>(null);
+
+function getStoredFavorites(): Product[] {
+    if (typeof window === 'undefined') return [];
+
+    const data = localStorage.getItem(FAVORITES_KEY);
+    return data ? JSON.parse(data) : [];
+}
+
+function saveFavorites(favorites: Product[]) {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+}
 
 export function FavoritesProvider({
     children,
@@ -24,6 +39,17 @@ export function FavoritesProvider({
     children: ReactNode;
 }) {
     const [favorites, setFavorites] = useState<Product[]>([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        setFavorites(getStoredFavorites());
+        setIsLoaded(true);
+    }, []);
+
+    useEffect(() => {
+        if (!isLoaded) return;
+        saveFavorites(favorites);
+    }, [favorites, isLoaded]);
 
     function toggleFavorite(product: Product) {
         setFavorites((prev) => {
@@ -44,10 +70,11 @@ export function FavoritesProvider({
     const value = useMemo(
         () => ({
             favorites,
+            isLoaded,
             toggleFavorite,
             isFavorite,
         }),
-        [favorites]
+        [favorites, isLoaded]
     );
 
     return (
