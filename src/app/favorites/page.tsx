@@ -2,6 +2,7 @@
 
 import { ProductGrid } from '@/components/product/ProductGrid';
 import { useFavorites } from '@/context/FavoritesContext';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 export default function FavoritesPage() {
     const { favorites } = useFavorites();
@@ -13,7 +14,13 @@ export default function FavoritesPage() {
             </h1>
 
             {favorites.length === 0 ? (
-                <p>No favorite products yet.</p>
+                <EmptyState 
+                    icon='🤍'
+                    title='No favorites yet'
+                    description='Save products you like and find them here later.'
+                    actionText='Browse Products'
+                    actionHref='/products'
+                />
             ) : (
                 <ProductGrid products={favorites} />
             )}

@@ -2,6 +2,7 @@
 
 import { CartItem } from '@/components/cart/CartItem';
 import { useCart } from '@/context/CartContext';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 export default function CartPage() {
     const { cart } = useCart();
@@ -17,7 +18,13 @@ export default function CartPage() {
             </h1>
 
             {cart.length === 0 ? (
-                <p>Your cart is empty.</p>
+                <EmptyState 
+                    icon='🛒'
+                    title='Your cart is empty'
+                    description="Looks like you haven't added any products yet."
+                    actionText='Browse Products'
+                    actionHref='/products'
+                />
             ) : (
                 <>
                     {cart.map((item) => (
