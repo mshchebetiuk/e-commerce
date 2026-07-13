@@ -2,6 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import type { Product } from '@/types/product';
+import { AddToCartButton } from './AddToCartButton';
+import { FavoriteButton } from './FavoriteButton';
+import { FavoriteIconButton } from './FavoriteIconButton';
 
 interface ProductCardProps {
     product: Product;
@@ -24,6 +27,11 @@ export function ProductCard({ product }: ProductCardProps) {
                             (max-width:1200px)50vw,
                             25vw'
                     />
+
+                    <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <FavoriteIconButton product={product} />
+                        <AddToCartButton product={product} />
+                    </div>
 
                     <span className="absolute left-3 top-3 rounded-full bg-red-500 px-3 py-1 text-xs font-semibold text-white">
                         -{Math.round(product.discountPercentage)}%
