@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 
 import { CartProvider } from "@/context/CartContext";
 import { FavoritesProvider } from "@/context/FavoritesContext";
+import { Toaster } from 'sonner';
 
 import './globals.css';
 
@@ -27,6 +28,12 @@ export default function RootLayout({
               <Header />
                 <main className="flex-1">{children}</main>
               <Footer />
+
+              <Toaster 
+                position="top-right"
+                richColors
+                closeButton
+              />
             </FavoritesProvider>
           </CartProvider>
         </div>

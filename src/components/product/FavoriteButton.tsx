@@ -2,6 +2,7 @@
 
 import { Product } from '@/types/product';
 import { useFavorites } from '@/context/FavoritesContext';
+import { toast } from 'sonner';
 
 interface Props {
     product: Product;
@@ -13,7 +14,10 @@ export function FavoriteButton({ product }: Props) {
 
     return (
         <button
-            onClick={() => toggleFavorite(product)}
+            onClick={() => {
+                toggleFavorite(product);
+                toast.success(favorite ? 'Removed from favorites' : 'Added to favorites');
+            }}
             className={`rounded-xl px-8 py-4 font-semibold transition ${
                 favorite 
                     ? 'bg-red-500 text-white hover:bg-red-600'
