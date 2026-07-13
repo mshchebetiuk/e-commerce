@@ -7,15 +7,22 @@ import { SearchBar } from '../filters/SearchBar';
 import { useDebounce } from '@/hooks/useDebounce';
 import { CategoryFilter } from '../filters/CategoryFilter';
 import { SortOption, SortSelect } from '../filters/SortSelect';
+import { Pagination } from './Pagination';
 
 interface ProductListProps {
     products: Product[];
     categories: string[];
+    total: number;
+    currentPage: number;
+    limit: number;
 }
 
 export function ProductList({
     products,
     categories,
+    total,
+    currentPage,
+    limit,
 }: ProductListProps) {
     const [search, setSearch] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -77,7 +84,14 @@ export function ProductList({
                 selectedCategory={selectedCategory}
                 onChange={setSelectedCategory}
             />
+
             <ProductGrid products={filteredProducts} />
+
+            <Pagination 
+                currentPage={currentPage}
+                total={total}
+                limit={limit}
+            />
         </>
     );
 }

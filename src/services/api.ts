@@ -7,11 +7,19 @@ const api = axios.create({
 
 interface ProductsResponse {
     products: Product[];
+    total: number;
+    skip: number;
+    limit: number;
 }
 
-export async function getProducts(): Promise<Product[]> {
-    const { data } = await api.get<ProductsResponse>('/products');
-    return data.products;
+export async function getProducts(
+    limit = 12, 
+    skip = 0,
+): Promise<ProductsResponse> {
+    const { data } = await api.get<ProductsResponse>(
+        `/products?limit=${limit}&skip=${skip}`
+    );
+    return data
 }
 
 export async function getCategories(): Promise<string[]> {
