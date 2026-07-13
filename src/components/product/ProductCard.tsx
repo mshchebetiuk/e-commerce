@@ -1,44 +1,77 @@
-import type { Product } from '@/types/product';
 import Link from 'next/link';
 import Image from 'next/image';
+
+import type { Product } from '@/types/product';
 
 interface ProductCardProps {
     product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+    const discountedPrice = (product.price * (1 - product.discountPercentage / 100)).toFixed(2);
+
     return (
         <Link href={`/products/${product.id}`}>
-            <article className="rounded-xl border bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-                <div className="relative mb-4 h-48 w-full">
+            <article className="group overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <div className="relative h-56 overflow-hidden">
                     <Image 
                         src={product.thumbnail}
                         alt={product.title}
-                        fill
+                        fill 
                         priority={product.id <= 4}
-                        className='rounded-lg object-cover'
-                        sizes='(max-width: 768px) 100vw, 
-                            (max-width: 1200px) 50vw, 
+                        className='object-cover transition-transform duration-300 group-hover:scale-105'
+                        sizes='(max-width:768px)100vw,
+                            (max-width:1200px)50vw,
                             25vw'
                     />
-                </div>
 
-                <h2 className="line-clamp-1 text-lg font-semibold">
-                    {product.title}
-                </h2>
-
-                <p className="mt-2 line-clamp-2 text-sm text-gray-500">
-                    {product.description}
-                </p>
-
-                <div className="mt-4 flex items-center justify-between">
-                    <span className="text-xl font-bold">
-                        ${product.price}
+                    <span className="absolute left-3 top-3 rounded-full bg-red-500 px-3 py-1 text-xs font-semibold text-white">
+                        -{Math.round(product.discountPercentage)}%
                     </span>
 
-                    <span className="text-yellow-600">
+                    <span className="absolute right-3 top-3 rounded-full bg-white px-3 py-1 text-xs font-semibold shadow">
                         ⭐️ {product.rating}
                     </span>
+                </div>
+
+                <div className="space-y-3 p-5">
+                    <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium capitalize text-gray-700">
+                        {product.category}
+                    </span>
+
+                    <h2 className="line-clamp-1 text-lg font-bold">
+                        {product.title}
+                    </h2>
+
+                    <div className="line-clamp-2 text-sm text-gray-500">
+                        {product.description}
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                        <span className="text-2xl font-bold text-gray-900">
+                            ${discountedPrice}
+                        </span>
+
+                        <span className="text-sm text-gray-400 line-through">
+                            ${product.price}
+                        </span>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                        <span
+                            className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                                product.stock > 10 
+                                    ? 'bg-green-100 text-green-700'
+                                    : 'bg-yellow-100 text-yellow-700'
+                            }`}
+                        >
+                            {product.stock > 10 ? 'In Stock' : `Only ${product.stock} left`}
+                        </span>
+
+                        <button className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-black">
+                            View
+                        </button>
+                    </div>
                 </div>
             </article>
         </Link>
