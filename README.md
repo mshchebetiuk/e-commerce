@@ -57,23 +57,23 @@ src/
 
 ### Home
 
-![Home](./screenshots/Home/Home.png)
+![Home](./screenshots/home/Home.png)
 
 ### Products
 
-![Products](./screenshots/Products/Products.png)
+![Products](./screenshots/products/Products.png)
 
 ### Product Details
 
-![Product Details](./screenshots/Product%20Details/Product_Details.png)
+![Product Details](./screenshots/product-details/Product_Details.png)
 
 ### Shopping Cart
 
-![Shopping Cart](./screenshots/Shopping%20Card/Shopping_Card.png)
+![Shopping Cart](./screenshots/shopping-card/Shopping_Card.png)
 
 ### Favorites
 
-![Favorites](./screenshots/Favorites/Favorites.png)
+![Favorites](./screenshots/favorites/Favorites.png)
 
 ---
 
