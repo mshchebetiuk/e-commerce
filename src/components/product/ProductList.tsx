@@ -8,6 +8,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { CategoryFilter } from '../filters/CategoryFilter';
 import { SortOption, SortSelect } from '../filters/SortSelect';
 import { Pagination } from './Pagination';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 interface ProductListProps {
     products: Product[];
@@ -85,13 +86,25 @@ export function ProductList({
                 onChange={setSelectedCategory}
             />
 
-            <ProductGrid products={filteredProducts} />
-
-            <Pagination 
-                currentPage={currentPage}
-                total={total}
-                limit={limit}
-            />
+            {filteredProducts.length === 0 ? (
+                <EmptyState 
+                    icon="📦"
+                    title="No products found"
+                    description='Try another category or search query.'
+                    actionText='Browse All Products'
+                    actionHref='/products'
+                />
+            ) : (
+                <>
+                    <ProductGrid products={filteredProducts} />
+        
+                    <Pagination 
+                        currentPage={currentPage}
+                        total={total}
+                        limit={limit}
+                    />
+                </>
+            )}
         </>
     );
 }
