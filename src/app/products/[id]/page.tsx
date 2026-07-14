@@ -20,7 +20,7 @@ export default async function ProductPage({
 
     return (
         <main className="mx-auto max-w-7xl px-4 py-12">
-            <div className="grid gap-12 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
                 <div className="relative aspect-square overflow-hidden rounded-3xl bg-white shadow-lg">
                     <Image
                         src={product.thumbnail}
@@ -37,11 +37,11 @@ export default async function ProductPage({
                         {product.category}
                     </span>
 
-                    <h1 className="text-5xl font-bold tracking-tight">
+                    <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
                         {product.title}
                     </h1>
 
-                    <div className="mt-6 flex items-center gap-4">
+                    <div className="mt-6 flex flex-wrap items-center gap-3">
                         <span className="rounded-full bg-yellow-100 px-4 py-2 font-semibold text-yellow-700">
                             ⭐️ {product.rating}
                         </span>
@@ -58,7 +58,7 @@ export default async function ProductPage({
                     </div>
 
                     <div className="mt-8 flex items-end gap-4">
-                        <span className="text-5xl font-bold text-blue-60">
+                        <span className="text-3xl font-bold text-blue-600 sm:text-4xl lg:text-5xl">
                             ${(product.price * (1 - product.discountPercentage / 100)).toFixed(2)}
                         </span>
 
@@ -71,7 +71,7 @@ export default async function ProductPage({
                         {product.description}
                     </p>
 
-                    <div className="mt-10 flex flex-wrap gap-4">
+                    <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                         <AddToCartButton product={product} />
                         <FavoriteButton product={product} />
                     </div>

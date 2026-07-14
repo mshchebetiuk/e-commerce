@@ -19,7 +19,7 @@ export function AddToCartButton({
                 addToCart(product);
                 toast.success(`${product.title} added to cart`);
             }}
-            className='rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white transition hover:bg-blue-700 hover:scale-105'
+            className='w-full rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white transition hover:bg-blue-700 sm:w-auto'
         >
             Add to Cart
         </button>

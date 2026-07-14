@@ -13,7 +13,7 @@ export default function CartPage() {
 
     return (
         <main className="mx-auto max-w-5xl px-4 py-10">
-            <h1 className="mb-8 text-4xl font-bold">
+            <h1 className="mb-6 text-3xl font-bold sm:text-4xl">
                 Shopping Cart
             </h1>
 
@@ -34,7 +34,7 @@ export default function CartPage() {
                         />
                     ))}
 
-                    <div className="mb-8 text-3xl font-bold">
+                    <div className="mt-8 text-center text-2xl font-bold sm:text-right sm:text-3xl">
                         Total: ${total.toFixed(2)}
                     </div>
                 </>

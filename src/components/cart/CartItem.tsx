@@ -15,12 +15,12 @@ export function CartItem({ item }: Props) {
     } = useCart();
 
     return (
-        <article className="mb-4 rounded-lg border p-4">
+        <article className="mb-4 rounded-xl border p-4 shadow-sm">
             <h2 className="text-lg font-semibold">{item.title}</h2>
 
             <p>${item.price}</p>
 
-            <div className="mt-3 flex items-center gap-3">
+            <div className="mt-4 flex flex-wrap items-center gap-3">
                 <button onClick={() => decreaseQuantity(item.id)}>
                     -
                 </button>
@@ -33,7 +33,7 @@ export function CartItem({ item }: Props) {
 
                 <button
                     onClick={() => removeFromCart(item.id)}
-                    className='ml-auto text-red-600'
+                    className='ml-auto rounded-lg px-4 py-2 text-red-600 transition hover:bg-red-50'
                 >
                     Remove
                 </button>

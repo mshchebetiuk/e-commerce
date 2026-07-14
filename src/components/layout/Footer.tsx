@@ -4,8 +4,8 @@ import { FolderGit2, UserRoundArrowLeft, Mail } from 'lucide-react';
 export function Footer() {
     return (
         <footer className="border-t border-gray-200 bg-slate-900 text-white">
-            <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-3">
-                <div>
+            <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-3">
+                <div className='text-center sm:text-left'>
                     <h2 className="text-2xl font-bold">
                         🛍 E-Commerce Store
                     </h2>
@@ -16,28 +16,29 @@ export function Footer() {
                     </p>
                 </div>
 
-                <div>
+                <div className='text-center sm:text-left'>
                     <h3 className="mb-4 text-lg font-semibold">
                         Navigation
                     </h3>
 
-                    <nav className="flex flex-col gap-3 text-slate-30">
-                        <Link href='/'>Home</Link>
-                        <Link href='/products'>Products</Link>
-                        <Link href='/favorites'>Favorites</Link>
-                        <Link href='/cart'>Cart</Link>
+                    <nav className="flex flex-col gap-3 text-slate-300">
+                        <Link href='/' className='transition hover:text-white'>Home</Link>
+                        <Link href='/products' className='transition hover:text-white'>Products</Link>
+                        <Link href='/favorites' className='transition hover:text-white'>Favorites</Link>
+                        <Link href='/cart' className='transition hover:text-white'>Cart</Link>
                     </nav>
                 </div>
 
-                <div>
+                <div className='text-center sm:text-left'>
                     <h3 className="mb-4 text-lg font-semibold">
                         Contact
                     </h3>
 
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col items-center gap-3 sm:items-start">
                         <a 
                             href="https://github.com/mshchebetiuk" 
                             target='_blank'
+                            rel='noopener noreferrer'
                             className="flex items-center gap-2 text-slate-300 hover:text-white"
                         >
                             <FolderGit2 size={18} />
@@ -47,6 +48,7 @@ export function Footer() {
                         <a 
                             href="https://www.linkedin.com/in/maksym-shchebetiuk-bb53102a0/" 
                             target='_blank'
+                            rel='noopener noreferrer'
                             className="flex items-center gap-2 text-slate-300 hover:text-white"
                         >
                             <UserRoundArrowLeft size={18} />

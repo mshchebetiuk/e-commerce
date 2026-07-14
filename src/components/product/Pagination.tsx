@@ -11,23 +11,53 @@ export function Pagination({
     total,
     limit,
 }: PaginationProps) {
-    const pages = Math.ceil(total / limit);
+    const totalPages = Math.ceil(total / limit);
+    const visiblePages = [];
+
+    for (let i = Math.max(1, currentPage - 1); i <= Math.min(totalPages, currentPage + 1); i++) {
+        visiblePages.push(i);
+    }
 
     return (
-        <div className="mt-10 flex justify-center gap-2">
-            {Array.from({ length: pages }, (_, i) => (
-                <Link
-                    key={i + 1}
-                    href={`/products?page=${i + 1}`}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
+            <Link
+                href={`/products?page=${Math.max(1, currentPage - 1)}`}
+                className={`rounded-lg border px-4 py-2 ${
+                    currentPage === 1
+                        ? 'pointer-events-none opacity-50'
+                        : ''
+                }`}
+            >
+                {'<'}
+            </Link>
+
+            {visiblePages.map((page) => (
+                <Link 
+                    key={page}
+                    href={`/products?page=${page}`}
                     className={`rounded-lg px-4 py-2 ${
-                        currentPage === i + 1 
+                        currentPage === page 
                             ? 'bg-gray-900 text-white'
                             : 'border'
                     }`}
                 >
-                    {i + 1}
+                    {page}
                 </Link>
             ))}
+
+            <Link
+                href={`/products?page=${Math.min(
+                    totalPages,
+                    currentPage + 1
+                )}`}
+                className={`rounded-lg border px-4 py-2 ${
+                    currentPage === totalPages 
+                        ? 'pointer-events-none opacity-50'
+                        : ''
+                }`}
+            >
+                {'>'}
+            </Link>
         </div>
     );
 }

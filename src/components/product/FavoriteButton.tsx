@@ -18,7 +18,7 @@ export function FavoriteButton({ product }: Props) {
                 toggleFavorite(product);
                 toast.success(favorite ? 'Removed from favorites' : 'Added to favorites');
             }}
-            className={`rounded-xl px-8 py-4 font-semibold transition ${
+            className={`w-full rounded-xl px-8 py-4 font-semibold transition sm:w-auto ${
                 favorite 
                     ? 'bg-red-500 text-white hover:bg-red-600'
                     : 'border border-gray-300 hover:bg-gray-100'
