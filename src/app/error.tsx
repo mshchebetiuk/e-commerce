@@ -6,25 +6,26 @@ interface ErrorProps {
 }
 
 export default function Error({
-    error,
     reset,
 }: ErrorProps) {
     return (
-        <main className="mx-auto flex min-h-[70vh] max-w-4xl flex-col items-center justify-center px-4 text-center">
-            <h1 className="mb-4 text-4xl font-bold">
-                Something went wrong 😢
-            </h1>
+        <main className="flex min-h-screen items center justify-center bg-gray-50">
+            <div className="max-w-md text-center">  
+                <h1 className="text-4xl font-bold">
+                    Something went wrong 😢
+                </h1>
 
-            <p className="mb-8 text-gray-600">
-                An unexpected error occurred.
-            </p>
+                <p className="mb-4 text-gray-500">
+                    An unexpected error occurred.
+                </p>
 
-            <button
-                onClick={reset}
-                className="rounded-lg bg-gray-900 px-6 py-3 text-white hover:bg-gray-700"
-            >
-                Try again
-            </button>
+                <button
+                    onClick={reset}
+                    className="mt-8 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+                >
+                    Try Again
+                </button>
+            </div>
         </main>
     )
 }

@@ -3,7 +3,6 @@ import Image from 'next/image';
 
 import type { Product } from '@/types/product';
 import { AddToCartButton } from './AddToCartButton';
-import { FavoriteButton } from './FavoriteButton';
 import { FavoriteIconButton } from './FavoriteIconButton';
 
 interface ProductCardProps {
