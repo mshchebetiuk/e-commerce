@@ -3,16 +3,18 @@ import Link from 'next/link';
 export default function HomePage() {
   return (
     <main>
-      <section className="bg-gradient-to-br from-slate-50 via-white to-blue-50">
-        <div className="mx-auto flex min-h-[80vh] max-w-7xl flex-col items-center justify-center px-4 text-center">
+      <section className="bg-linear-to-br from-slate-50 via-white to-blue-50">
+        <div className="mx-auto flex min-h-[80vh] max-w-7xl flex-col items-center justify-center px-4 text-center pt-12 pb-12">
           <span className="mb-4 rounded-full bg-blue-100 px-4 py-2 text-sm-font-semibold text-blue-700">
             🚀 Built with Next.js 16 + TypeScript
           </span>
 
           <h1 className="max-w-4xl text-5xl font-extrabold tracking-tight text-gray-900 md:text-7xl">
-            Modern 
-            <span className="text-blue-600"> E-Commerce </span>
-            Store
+            <div className="flex flex-col">
+              Modern 
+              <span className="text-blue-600"> E-Commerce </span>
+              Store
+            </div>
           </h1>
 
           <div className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">

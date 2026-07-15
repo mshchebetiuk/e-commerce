@@ -22,7 +22,7 @@ export function Header() {
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
                 <Link 
                     href="/" 
-                    className='hidden flex itesm-center gap-2 text-xl font-bold md:flex'
+                    className='hidden items-center gap-2 text-xl font-bold md:flex'
                 >
                     <Store size={28} />
                     <span>E-Commerce</span>
@@ -82,7 +82,7 @@ export function Header() {
                         </Link>
 
                         <Link
-                            href='/products'
+                            href='/cart'
                             onClick={() => setIsMenuOpen(false)}
                             className='rounded-lg px-4 py-3 hover:bg-gray-100'
                         >
