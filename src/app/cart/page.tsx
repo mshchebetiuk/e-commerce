@@ -3,6 +3,7 @@
 import { CartItem } from '@/components/cart/CartItem';
 import { useCart } from '@/context/CartContext';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { CartSummary } from '@/components/cart/CartSummary';
 
 export default function CartPage() {
     const { cart } = useCart();
@@ -17,28 +18,34 @@ export default function CartPage() {
                 Shopping Cart
             </h1>
 
-            {cart.length === 0 ? (
-                <EmptyState 
-                    icon='🛒'
-                    title='Your cart is empty'
-                    description="Looks like you haven't added any products yet."
-                    actionText='Browse Products'
-                    actionHref='/products'
-                />
-            ) : (
-                <>
-                    {cart.map((item) => (
-                        <CartItem 
-                            key={item.id}
-                            item={item}
+            <div className="grid gap-8 lg:grid-cols-[1fr_350px]">
+                <div>
+                    {cart.length === 0 ? (
+                        <EmptyState 
+                            icon='🛒'
+                            title='Your cart is empty'
+                            description="Looks like you haven't added any products yet."
+                            actionText='Browse Products'
+                            actionHref='/products'
                         />
-                    ))}
+                    ) : (
+                        <>
+                            {cart.map((item) => (
+                                <CartItem 
+                                    key={item.id}
+                                    item={item}
+                                />
+                            ))}
 
-                    <div className="mt-8 text-center text-2xl font-bold sm:text-right sm:text-3xl">
-                        Total: ${total.toFixed(2)}
-                    </div>
-                </>
-            )}
+                            {/* <div className="mt-8 text-center text-2xl font-bold sm:text-right sm:text-3xl">
+                                Total: ${total.toFixed(2)}
+                            </div> */}
+                        </>
+                    )}
+                </div>
+
+                <CartSummary />
+            </div>
         </main>
     );
 }
