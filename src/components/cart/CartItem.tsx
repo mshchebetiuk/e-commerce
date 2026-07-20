@@ -19,8 +19,8 @@ export function CartItem({ item }: Props) {
     const totalPrice = (item.price * item.quantity).toFixed(2);
 
     return (
-        <article className="mb-4 grid gap-4 rounded-xl border bg-white p-4 shadow-sm md:grid-cols-[120px_1fr]">
-            <div className="relative mx-auto h-32 w-32 overflow-hidden rounded-xl bg-gray-100">
+        <article className="mb-4 grid gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-colors md:grid-cols-[120px_1fr] dark:border-gray-700 dark:bg-gray-900">
+            <div className="relative mx-auto h-32 w-32 overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
                 <Image
                     src={item.thumbnail}
                     alt={item.title}
@@ -32,15 +32,15 @@ export function CartItem({ item }: Props) {
 
             <div className="flex flex-col justify-between">
                 <div>
-                    <h2 className="text-xl font-semibold">
+                    <h2 className="text-xl font-semibold dark:text-white">
                         {item.title}
                     </h2>
 
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
                         Brand: {item.brand}
                     </p>
 
-                    <p className="text-sm capitalize text-gray-500">
+                    <p className="text-sm capitalize text-gray-500 dark:text-gray-400">
                         Category: {item.category}
                     </p>
 
@@ -48,7 +48,7 @@ export function CartItem({ item }: Props) {
                         ${item.price}
                     </span>
 
-                    <p className="mt-1 font-semibold text-gray-700">
+                    <p className="mt-1 font-semibold text-gray-700 dark:text-gray-300">
                         Total: ${totalPrice}
                     </p>
                 </div>
@@ -62,7 +62,7 @@ export function CartItem({ item }: Props) {
                         -
                     </Button>
 
-                    <span className='min-w-8 text-center font-semibold'>
+                    <span className='min-w-8 text-center font-semibold dark:text-white'>
                         {item.quantity}
                     </span>
 

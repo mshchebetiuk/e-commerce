@@ -68,7 +68,7 @@ export function ProductList({
 
     return (
         <>
-            <div className="mb-8">
+            <div className="mb-8 space-y-4">
                 <SearchBar 
                     value={search} 
                     onChange={setSearch} 

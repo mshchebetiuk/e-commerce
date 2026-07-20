@@ -21,7 +21,7 @@ export default async function ProductPage({
     return (
         <main className="mx-auto max-w-7xl px-4 py-12">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
-                <div className="relative aspect-square overflow-hidden rounded-3xl bg-white shadow-lg">
+                <div className="relative aspect-square overflow-hidden rounded-3xl bg-white shadow-lg transition-colors dark:bg-gray-900">
                     <Image
                         src={product.thumbnail}
                         alt={product.title}
@@ -33,16 +33,16 @@ export default async function ProductPage({
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="mb-4 inline-flex w-fit rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold capitalize text-blue-700">
+                    <span className="mb-4 inline-flex w-fit rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold capitalize text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
                         {product.category}
                     </span>
 
-                    <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                    <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl dark:text-white">
                         {product.title}
                     </h1>
 
                     <div className="mt-6 flex flex-wrap items-center gap-3">
-                        <span className="rounded-full bg-yellow-100 px-4 py-2 font-semibold text-yellow-700">
+                        <span className="rounded-full bg-yellow-100 px-4 py-2 font-semibold text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300">
                             ⭐️ {product.rating}
                         </span>
 
@@ -62,12 +62,12 @@ export default async function ProductPage({
                             ${(product.price * (1 - product.discountPercentage / 100)).toFixed(2)}
                         </span>
 
-                        <span className="pb-2 text-2xl text-gray-400 line-through">
+                        <span className="pb-2 text-2xl text-gray-400 line-through dark:text-gray-500">
                             ${product.price}
                         </span>
                     </div>
 
-                    <p className="mt-8 text-lg leading-8 text-gray-600">
+                    <p className="mt-8 text-lg leading-8 text-gray-600 dark:text-gray-300">
                         {product.description}
                     </p>
 

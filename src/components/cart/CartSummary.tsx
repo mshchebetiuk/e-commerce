@@ -17,36 +17,36 @@ export function CartSummary() {
     const total = subtotal + shipping; 
 
     return (
-        <aside className="rounded-2xl border-bg-white p-6 shadow-sm">
-            <h2 className="mb-6 text-2xl font-bold">
+        <aside className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-colors dark:border-gray-700 dark:bg-gray-900">
+            <h2 className="mb-6 text-2xl font-bold dark:text-white">
                 Order Summary
             </h2>
 
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                    <span className="text-gray-500">
+                    <span className="text-gray-500 dark:text-gray-400">
                         Subtotal
                     </span>
 
-                    <span className="font-semibold">
+                    <span className="font-semibold dark:text-white">
                         {formatPrice(subtotal)}
                     </span>
                 </div>
 
 
                 <div className="flex items-center justify-between">
-                    <span className="text-gray-500">
+                    <span className="text-gray-500 dark:text-gray-400">
                         Shipping
                     </span>
 
-                    <span className="font-semibold">
+                    <span className="font-semibold dark:text-white">
                         {formatPrice(shipping)}
                     </span>
                 </div>
 
-                <hr />
+                <hr className='border-gray-200 dark:border-gray-700'/>
 
-                <div className="flex items-center justify-between text-lg font-bold">
+                <div className="flex items-center justify-between text-lg font-bold dark:text-white">
                     <span>Total</span>
                     <span>{formatPrice(total)}</span>
                 </div>
@@ -61,7 +61,7 @@ export function CartSummary() {
 
             <Link
                 href='/products'
-                className='mt-3 block text-center text-sm text-blue-600 hover:underline'
+                className='mt-3 block text-center text-sm text-blue-600 transition-colors hover:underline dark:text-blue-400'
             >
                 Continue Shopping
             </Link>

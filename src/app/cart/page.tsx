@@ -8,13 +8,13 @@ import { CartSummary } from '@/components/cart/CartSummary';
 export default function CartPage() {
     const { cart } = useCart();
 
-    const total = cart.reduce(
-        (sum, item) => sum + item.price * item.quantity, 0
-    );
+    // const total = cart.reduce(
+    //     (sum, item) => sum + item.price * item.quantity, 0
+    // );
 
     return (
         <main className="mx-auto max-w-5xl px-4 py-10">
-            <h1 className="mb-6 text-3xl font-bold sm:text-4xl">
+            <h1 className="mb-6 text-3xl font-bold transition-colors sm:text-4xl dark:text-white">
                 Shopping Cart
             </h1>
 

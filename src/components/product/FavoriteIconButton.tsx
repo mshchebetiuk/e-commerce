@@ -28,10 +28,10 @@ export function FavoriteIconButton({ product }: Props) {
                         : 'Added to favorites'
                 );
             }}
-            className={`rounded-full p-3 transition cursor-pointer ${
+            className={`rounded-full p-3 transition-colors cursor-pointer ${
                 favorite 
                     ? 'bg-red-500 text-white hover:bg-red-600'
-                    : 'bg-white hover:bg-gray-100'
+                    : 'bg-white text-gray-900 hover:bg-gray-100 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800'
             }`}
             aria-label="Toggle favorite"
         >

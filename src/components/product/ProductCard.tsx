@@ -15,7 +15,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
     return (
         <Link href={`/products/${product.id}`}>
-            <article className="group overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <article className="group overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-gray-700 dark:bg-gray-900">
                 <div className="relative h-56 overflow-hidden">
                     <Image 
                         src={product.thumbnail}
@@ -37,21 +37,21 @@ export function ProductCard({ product }: ProductCardProps) {
                         -{Math.round(product.discountPercentage)}%
                     </span>
 
-                    <span className="absolute right-3 top-3 rounded-full bg-white px-3 py-1 text-xs font-semibold shadow">
+                    <span className="absolute right-3 top-3 rounded-full bg-white px-3 py-1 text-xs font-semibold shadow dark:bg-gray-800 dark:text-white">
                         ⭐️ {product.rating}
                     </span>
                 </div>
 
                 <div className="space-y-3 p-5">
-                    <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium capitalize text-gray-700">
+                    <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium capitalize text-gray-700 dark:bg-gray-800 dark:text-gray-200">
                         {product.category}
                     </span>
 
-                    <h2 className="line-clamp-1 text-lg font-bold">
+                    <h2 className="line-clamp-1 text-lg font-bold dark:text-white">
                         {product.title}
                     </h2>
 
-                    <div className="line-clamp-2 text-sm text-gray-500">
+                    <div className="line-clamp-2 text-sm text-gray-500 dark:text-gray-400">
                         {product.description}
                     </div>
 
@@ -60,7 +60,7 @@ export function ProductCard({ product }: ProductCardProps) {
                             ${discountedPrice}
                         </span>
 
-                        <span className="text-sm text-gray-400 line-through">
+                        <span className="text-2xl font-bold text-gray-900 dark:text-white">
                             ${product.price}
                         </span>
                     </div>

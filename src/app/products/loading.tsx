@@ -1,4 +1,3 @@
-import { SkeletonCard } from '@/components/ui/SkeletonCard';
 import { Spinner } from '@/components/ui/Spinner';
 
 export default function Loading() {

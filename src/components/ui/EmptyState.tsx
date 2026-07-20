@@ -16,14 +16,14 @@ export function EmptyState({
     actionHref,
 }: EmptyStateProps) {
     return (
-        <div className="mx-auto flex w-full max-w-md flex-col items-center justify-center rounded-3xl border bg-white px-6 py-10 text-center shadow-sm sm:px-8 sm:py-14">
+        <div className="mx-auto flex w-full max-w-md flex-col items-center justify-center rounded-3xl border border-gray-200 bg-white px-6 py-10 text-center shadow-sm transition-colors sm:px-8 sm:py-14 dark:border-gray-700 dark:bg-gray-900">
             <div className="mt-5 text-5xl sm:text-6xl">{icon}</div>
 
-            <h2 className="text-xl font-bold text-gray-900 sm:text-2xl">
+            <h2 className="text-xl font-bold text-gray-900 sm:text-2xl dark:text-white">
                 {title}
             </h2>
 
-            <p className="mt-3 max-w-sm text-sm leading-6 text-gray-500 sm:text-base">{description}</p>
+            <p className="mt-3 max-w-sm text-sm leading-6 text-gray-500 sm:text-base dark:text-gray-400">{description}</p>
 
             <Link
                 href={actionHref}
