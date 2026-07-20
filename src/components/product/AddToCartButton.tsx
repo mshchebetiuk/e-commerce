@@ -2,6 +2,7 @@
 
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
+import { Button } from '../ui/Button';
 import { toast } from 'sonner';
 
 interface AddToCartButtonProps {
@@ -14,14 +15,14 @@ export function AddToCartButton({
     const { addToCart } = useCart();
 
     return (
-        <button
+        <Button
             onClick={() => { 
                 addToCart(product);
                 toast.success(`${product.title} added to cart`);
             }}
-            className='w-full rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white transition hover:bg-blue-700 sm:w-auto'
+            className='w-full px-8 py-4 sm:w-auto'
         >
             Add to Cart
-        </button>
+        </Button>
     );
 }

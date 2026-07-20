@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { useCart } from '@/context/CartContext';
 import { formatPrice } from '@/utils/formatPrice';
+import { Button } from '../ui/Button';
 
 export function CartSummary() {
     const { cart } = useCart();
@@ -51,9 +52,12 @@ export function CartSummary() {
                 </div>
             </div>
 
-            <button className="mt-6 w-full rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700">
+            <Button
+                fullWidth
+                className='mt-6'
+            >
                 Checkout
-            </button>
+            </Button>
 
             <Link
                 href='/products'

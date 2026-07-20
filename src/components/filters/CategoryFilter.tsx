@@ -1,5 +1,7 @@
 'use client';
 
+
+
 interface CategoryFilterProps {
     categories: string[];
     selectedCategory: string;
@@ -15,7 +17,7 @@ export function CategoryFilter({
         <div className="mb-6 flex flex-wrap gap-2">
             <button
                 onClick={() => onChange('')}
-                className={`rounded-lg px-4 py-2 transition ${
+                className={`rounded-lg px-4 py-2 transition cursor-pointer ${
                     selectedCategory === ''
                         ? 'bg-gray-900 text-white'
                         : 'bg-gray-200 hover:bg-gray-300'
@@ -28,7 +30,7 @@ export function CategoryFilter({
                 <button
                     key={category}
                     onClick={() => onChange(category)}
-                    className={`rounded-lg px-4 py-2 capitalize transition ${
+                    className={`rounded-lg px-4 py-2 capitalize transition cursor-pointer ${
                         selectedCategory === category 
                             ? 'bg-gray-900 text-white'
                             : 'bg-gray-200 hover:bg-gray-300'

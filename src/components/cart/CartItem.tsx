@@ -1,6 +1,7 @@
 'use client';
 
 import { CartItem as CartItemType } from '@/types/cart';
+import { Button } from '../ui/Button';
 import { useCart } from '@/context/CartContext';
 import Image from 'next/image';
 
@@ -53,30 +54,33 @@ export function CartItem({ item }: Props) {
                 </div>
 
                 <div className="mt-6 flex flex-wrap items-center gap-3">
-                    <button 
+                    <Button 
                         onClick={() => decreaseQuantity(item.id)}
-                        className='flex h-10 w-10 items-center justify-center rounded-lg border transition hover:bg-gray-100'
+                        variant='secondary'
+                        className='h-10 w-10 rounded-lg border p-0'
                     >
                         -
-                    </button>
+                    </Button>
 
                     <span className='min-w-8 text-center font-semibold'>
                         {item.quantity}
                     </span>
 
-                    <button 
+                    <Button 
                         onClick={() => increaseQuantity(item.id)}
-                        className='flex h-10 w-10 items-center justify-center rounded-lg border transition hover:bg-gray-100'    
+                        variant='secondary'
+                        className='h-10 w-10 rounded-lg border p-0'    
                     >
                         +
-                    </button>
+                    </Button>
 
-                    <button
+                    <Button
                         onClick={() => removeFromCart(item.id)}
-                        className='ml-auto rounded-lg border border-red-200 px-4 py-2 text-red-600 transition hover:bg-red-50'
+                        variant='danger'
+                        className='ml-auto'
                     >
                         Remove
-                    </button>
+                    </Button>
                 </div>
             </div>
         </article>

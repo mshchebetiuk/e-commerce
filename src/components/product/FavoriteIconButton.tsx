@@ -28,7 +28,7 @@ export function FavoriteIconButton({ product }: Props) {
                         : 'Added to favorites'
                 );
             }}
-            className={`rounded-full p-3 transition ${
+            className={`rounded-full p-3 transition cursor-pointer ${
                 favorite 
                     ? 'bg-red-500 text-white hover:bg-red-600'
                     : 'bg-white hover:bg-gray-100'

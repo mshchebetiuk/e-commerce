@@ -4,6 +4,8 @@ interface ErrorProps {
     reset: () => void;
 }
 
+import { Button } from "@/components/ui/Button";
+
 export default function Error({ reset }: ErrorProps) {
     return (
         <div className="py-20 text-center">
@@ -11,12 +13,12 @@ export default function Error({ reset }: ErrorProps) {
                 Failed to load products
             </h2>
 
-            <button
+            <Button
                 onClick={reset}
-                className="mt-6 rounded-xl bg-blue-600 px-6 py-3 text-white"
+                className="mt-6"
             >
                 Retry
-            </button>
+            </Button>
         </div>
     );
 }

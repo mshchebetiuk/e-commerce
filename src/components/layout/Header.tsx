@@ -55,7 +55,7 @@ export function Header() {
 
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className='rounded-lg p-2 transition hover:bg-gray-100 md:hidden'
+                    className='rounded-lg p-2 transition hover:bg-gray-100 md:hidden cursor-pointer'
                     aria-label='Toggle menu'
                 >
                     {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

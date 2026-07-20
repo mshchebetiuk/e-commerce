@@ -22,7 +22,7 @@ export function AddToCartIconButton({ product }: Props) {
                 addToCart(product);
                 toast.success(`${product.title} added to cart`);
             }}
-            className='rounded-full bg-blue-600 p-3 text-white transition hover:bg-blue-700'
+            className='rounded-full bg-blue-600 p-3 text-white transition cursor-pointer hover:bg-blue-700'
             aria-label='Add to cart'
         >
             <ShoppingCart size={18} />

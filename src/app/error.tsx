@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from "@/components/ui/Button";
+
 interface ErrorProps {
     error: Error;
     reset: () => void;
@@ -19,12 +21,12 @@ export default function Error({
                     An unexpected error occurred.
                 </p>
 
-                <button
+                <Button
                     onClick={reset}
-                    className="mt-8 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+                    className="mt-8 px-6 py-3"
                 >
                     Try Again
-                </button>
+                </Button>
             </div>
         </main>
     )

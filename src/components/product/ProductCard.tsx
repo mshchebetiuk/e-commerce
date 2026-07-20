@@ -4,6 +4,7 @@ import Image from 'next/image';
 import type { Product } from '@/types/product';
 import { AddToCartButton } from './AddToCartButton';
 import { FavoriteIconButton } from './FavoriteIconButton';
+import { Button } from '../ui/Button';
 
 interface ProductCardProps {
     product: Product;
@@ -75,9 +76,11 @@ export function ProductCard({ product }: ProductCardProps) {
                             {product.stock > 10 ? 'In Stock' : `Only ${product.stock} left`}
                         </span>
 
-                        <button className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-black">
+                        <Button 
+                            className="px-4 py-2 text-sm"
+                        >
                             View
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </article>
