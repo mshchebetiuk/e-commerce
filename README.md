@@ -1,39 +1,60 @@
-# 🛍 E-Commerce Store
+# 🛍️ E-Commerce Store
 
-A modern and responsive e-commerce web application built with **Next.js**, **TypeScript**, and **Tailwind CSS**.
+A modern, responsive e-commerce web application built with **Next.js 16**, **React 19**, **TypeScript**, and **Tailwind CSS v4**.
+
+The application allows users to browse products, search, filter, sort, manage favorites, add items to the shopping cart, and switch between light and dark themes.
+
+---
+
+## 🌐 Live Demo
+
+> https://e-commerce-mshchebetiuk.netlify.app/
 
 ---
 
 ## ✨ Features
 
-- Browse products
-- Product details page
-- Search products
-- Filter by category
-- Sort products
-- Pagination
-- Shopping cart
-- Favorites
-- Responsive design
-- Loading skeletons
-- Error handling
-- Empty states
-- Toast notifications
-- Local Storage persistence
+- 🛍 Browse products
+- 📄 Product details page
+- 🔍 Search products
+- 🏷 Filter by category
+- ↕️ Sort products
+- 📄 Pagination
+- 🛒 Shopping cart
+- ❤️ Favorites
+- 🌙 Dark / Light mode
+- 📱 Fully responsive design
+- ⌛ Loading skeletons
+- ⚠️ Error handling
+- 📭 Empty states
+- 🔔 Toast notifications
+- 💾 Local Storage persistence
 
 ---
 
 ## 🛠 Tech Stack
 
-- Next.js (App Router)
-- React
+### Frontend
+
+- Next.js 16 (App Router)
+- React 19
 - TypeScript
-- Tailwind CSS
-- Axios
+- Tailwind CSS v4
+
+### State Management
+
 - Context API
-- DummyJSON API
+
+### Libraries
+
+- Axios
+- next-themes
 - Lucide React
 - Sonner
+
+### API
+
+- DummyJSON API
 
 ---
 
@@ -45,59 +66,60 @@ src/
 ├── app/
 ├── components/
 ├── context/
+├── hooks/
 ├── services/
 ├── types/
 ├── utils/
-└── hooks/
+└── lib/
 ```
 
 ---
 
 ## 📸 Screenshots
 
-### Home
+### 🏠 Home
 
-![Home](./screenshots/home/Home.png)
+![Home](./screenshots/home/home.png)
 
-### Products
+### 🛍 Products
 
-![Products](./screenshots/products/Products.png)
+![Products](./screenshots/products/products.png)
 
-### Product Details
+### 📄 Product Details
 
-![Product Details](./screenshots/product-details/Product_Details.png)
+![ProductDetails](./screenshots/product-details/product-details.png)
 
-### Shopping Cart
+### 🛒 Shopping Cart
 
-![Shopping Cart](./screenshots/shopping-card/Shopping_Card.png)
+![ShoppingCart](./screenshots/shopping-card/shopping-card.png)
 
-### Favorites
+### ❤️ Favorites
 
-![Favorites](./screenshots/favorites/Favorites.png)
+![Favorites](./screenshots/favorites/favorites.png)
 
 ---
 
 ## 🚀 Getting Started
 
-Clone the repository
+### Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ecommerce-store.git
+git clone https://github.com/mshchebetiuk/ecommerce-store.git
 ```
 
-Install dependencies
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-Run development server
+### Run development server
 
 ```bash
 npm run dev
 ```
 
-Open
+Open your browser:
 
 ```text
 http://localhost:3000
@@ -121,11 +143,11 @@ npm run lint
 
 ---
 
-## 📱 Responsive
+## 📱 Responsive Design
 
-- Mobile
-- Tablet
-- Desktop
+- ✅ Mobile
+- ✅ Tablet
+- ✅ Desktop
 
 ---
 
@@ -144,9 +166,10 @@ npm run lint
 - User Profile
 - Checkout
 - Order History
-- Dark Mode
-- Related Products
+- Product Reviews
 - Product Gallery
+- Unit Testing
+- End-to-End Testing
 
 ---
 
@@ -154,14 +177,12 @@ npm run lint
 
 **Maksym Shchebetiuk**
 
-GitHub
+- GitHub: https://github.com/mshchebetiuk
+- LinkedIn: https://www.linkedin.com/in/maksym-shchebetiuk-bb53102a0/
+- Email: its.mshchebetiuk@gmail.com
 
-https://github.com/mshchebetiuk
+---
 
-LinkedIn
+## 📄 License
 
-https://www.linkedin.com/in/maksym-shchebetiuk-bb53102a0/
-
-Email
-
-its.mshchebetiuk@gmail.com
+This project is intended for educational and portfolio purposes.
