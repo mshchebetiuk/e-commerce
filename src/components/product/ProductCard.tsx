@@ -56,11 +56,11 @@ export function ProductCard({ product }: ProductCardProps) {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <span className="text-2xl font-bold text-gray-900">
+                        <span className="text-2xl font-bold text-gray-900 dark:text-white">
                             ${discountedPrice}
                         </span>
 
-                        <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                        <span className="text-lg text-gray-500 line-through dark:text-gray-400">
                             ${product.price}
                         </span>
                     </div>
@@ -69,8 +69,8 @@ export function ProductCard({ product }: ProductCardProps) {
                         <span
                             className={`rounded-full px-3 py-1 text-xs font-semibold ${
                                 product.stock > 10 
-                                    ? 'bg-green-100 text-green-700'
-                                    : 'bg-yellow-100 text-yellow-700'
+                                    ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
+                                    : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300'
                             }`}
                         >
                             {product.stock > 10 ? 'In Stock' : `Only ${product.stock} left`}
