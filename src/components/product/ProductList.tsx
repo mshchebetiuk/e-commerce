@@ -82,6 +82,7 @@ export function ProductList({
 
             <CategoryFilter 
                 categories={categories}
+                products={products}
                 selectedCategory={selectedCategory}
                 onChange={setSelectedCategory}
             />
