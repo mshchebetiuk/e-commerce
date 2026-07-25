@@ -1,12 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingCart, Heart, Store, Menu, X } from 'lucide-react';
+import { 
+    ShoppingCart, 
+    Heart, 
+    Store, 
+    Menu, 
+    X 
+} from 'lucide-react';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
+
 import { useCart } from '@/context/CartContext';
 import { useFavorites } from '@/context/FavoritesContext';
-import dynamic from 'next/dynamic';
 
 const ThemeToggle = dynamic(
     () => import('@/components/ThemeToggle').then((mod) => mod.ThemeToggle), 
@@ -27,16 +34,19 @@ export function Header() {
 
     return (
         <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur transition-colors dark:border-gray-700 dark:bg-gray-900/80">
-            <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
+            <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4">
                 <Link 
                     href="/"
-                    className='hidden items-center gap-2 text-xl font-bold transition-colors md:flex dark:text-white'
+                    className='flex shirk-0 items-center gap-2 font-bold transition-colors dark:text-white'
                 >
-                    <Store size={28} />
-                    <span>E-Commerce</span>
+                    <Store size={24} />
+
+                    <span className=''>
+                        E-Commerce
+                    </span>
                 </Link>
 
-                <nav className="flex items-center gap-6">
+                <nav className="hidden items-center gap-6 md:flex">
                     <Link 
                         href='/products' 
                         className='transition-colors hover:text-blue-600 dark:text-gray-200'
@@ -63,13 +73,30 @@ export function Header() {
                     <ThemeToggle />
                 </nav>
 
-                <button
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className='cursor-pointer rounded-lg p-2 transition-colors hover:bg-gray-100 md:hidden dark:text-white dark:hover:bg-gray-800'
-                    aria-label='Toggle menu'
-                >
-                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+                <div className="flex items-center gap-1 md:hidden">
+                    <Link
+                        href='/cart'
+                        className='flex items-center gap-1 rounded-lg p-2 transition-colors hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800'
+                        aria-label={`Shopping cart with ${totalItems} items`}
+                    >
+                        <ShoppingCart size={21} />
+                        <span className="text-sm">({totalItems})</span>
+                    </Link>
+
+                    <button
+                        type='button'
+                        onClick={() => setIsMenuOpen((prev) => !prev)}
+                        className='cursor-pointer rounded-lg p-2 transition-colors hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800'
+                        aria-label="Toggle menu"
+                        aria-expanded={isMenuOpen}
+                    >
+                        {isMenuOpen ? (
+                            <X size={24} />
+                        ) : (
+                            <Menu size={24} />
+                        )}
+                    </button>
+                </div>
             </div>
 
             {isMenuOpen && (
@@ -88,7 +115,8 @@ export function Header() {
                             onClick={() => setIsMenuOpen(false)}
                             className='rounded-lg px-4 py-3 transition-colors hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800'
                         >
-                            Favorites ({favorites.length})
+                            <span>Favorires</span>{' '}
+                            <span>({favorites.length})</span>
                         </Link>
 
                         <Link
@@ -96,8 +124,17 @@ export function Header() {
                             onClick={() => setIsMenuOpen(false)}
                             className='rounded-lg px-4 py-3 transition-colors hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800'
                         >
-                            Cart ({totalItems})
+                            <span>Cart</span>{' '}
+                            <span>({totalItems})</span>
                         </Link>
+
+                        <div className="mt-2 flex items-center justify-between border-t border-gray-200 px-4 pt-3 dark:border-gray-700">
+                            <span className="dark:text-gray-200">
+                                Theme
+                            </span>
+
+                            <ThemeToggle />
+                        </div>
                     </nav>
                 </div>
             )}
