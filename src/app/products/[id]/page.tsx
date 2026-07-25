@@ -1,13 +1,34 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import { notFound } from 'next/navigation';
+
 import { getProduct } from '@/services/api';
 import { FavoriteButton } from '@/components/product/FavoriteButton';
 import { AddToCartButton } from '@/components/product/AddToCartButton';
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
 
 interface ProductPageProps {
     params: Promise<{
         id: string;
     }>;
+}
+
+export async function generateMetadata({
+    params,
+}: ProductPageProps): Promise<Metadata> {
+    const { id } = await params;
+    const product = await getProduct(Number(id));
+
+    if (!product) {
+        return {
+            title: 'Product Not Found',
+            description: 'The request product could not be found.',
+        };
+    }
+
+    return {
+        title: product.title,
+        description: product.description,
+    };
 }
 
 export default async function ProductPage({

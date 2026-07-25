@@ -5,6 +5,12 @@ import {
 } from '@/services/api';
 
 import { ProductList } from '@/components/product/ProductList';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Products',
+    description: 'Browse products by category, search and sort products.',
+};
 
 interface Props {
     searchParams: Promise<{

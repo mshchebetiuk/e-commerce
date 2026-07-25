@@ -11,8 +11,11 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: "E-Commerce Store",
-  description: "Pet project built with Next.js, TypeScript and Tailwind CSS",
+  title: {
+    default: 'E-Commerce Store',
+    template: '%s | E-Commerce Store',
+  },
+  description: "Modern e-commerce store built with Next.js, TypeScript and Tailwind CSS",
 };
 
 export default function RootLayout({
