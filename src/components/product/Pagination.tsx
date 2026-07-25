@@ -4,12 +4,14 @@ interface PaginationProps {
     currentPage: number;
     total: number;
     limit: number;
+    category?: string;
 }
 
 export function Pagination({
     currentPage,
     total,
     limit,
+    category = '',
 }: PaginationProps) {
     const totalPages = Math.ceil(total / limit);
     const visiblePages = [];
@@ -18,10 +20,18 @@ export function Pagination({
         visiblePages.push(i);
     }
 
+    const getPageHref = (page: number) => {
+        const params = new URLSearchParams();
+        params.set('page', String(page));
+
+        if (category) params.set('category', category);
+        return `/products?${params.toString()}`;
+    };
+
     return (
         <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
             <Link
-                href={`/products?page=${Math.max(1, currentPage - 1)}`}
+                href={getPageHref(Math.max(1, currentPage - 1))}
                 className={`rounded-lg border px-4 py-2 ${
                     currentPage === 1
                         ? 'pointer-events-none opacity-50'
@@ -34,10 +44,10 @@ export function Pagination({
             {visiblePages.map((page) => (
                 <Link 
                     key={page}
-                    href={`/products?page=${page}`}
+                    href={getPageHref(page)}
                     className={`rounded-lg px-4 py-2 ${
                         currentPage === page 
-                            ? 'bg-gray-900 text-white'
+                            ? 'bg-gray-900 text-white dark:bg-blue-600'
                             : 'border'
                     }`}
                 >
@@ -46,10 +56,9 @@ export function Pagination({
             ))}
 
             <Link
-                href={`/products?page=${Math.min(
-                    totalPages,
-                    currentPage + 1
-                )}`}
+                href={getPageHref(
+                    Math.min(totalPages, currentPage + 1)
+                )}
                 className={`rounded-lg border px-4 py-2 ${
                     currentPage === totalPages 
                         ? 'pointer-events-none opacity-50'

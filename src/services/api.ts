@@ -16,10 +16,32 @@ export async function getProducts(
     limit = 12, 
     skip = 0,
 ): Promise<ProductsResponse> {
+    const { data } = await api.get<ProductsResponse>('/products', {
+        params: {
+            limit,
+            skip,
+        },
+    });
+
+    return data;
+}
+
+export async function getProductsByCategory(
+    category: string, 
+    limit = 12,
+    skip = 0,
+): Promise<ProductsResponse> {
     const { data } = await api.get<ProductsResponse>(
-        `/products?limit=${limit}&skip=${skip}`
+        `/products/category/${encodeURIComponent(category)}`,
+        {
+            params: {
+                limit, 
+                skip,
+            },
+        }
     );
-    return data
+
+    return data;
 }
 
 export async function getCategories(): Promise<string[]> {

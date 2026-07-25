@@ -1,23 +1,16 @@
 'use client';
 
-import type { Product } from '@/types/product';
-
 interface CategoryFilterProps {
     categories: string[];
-    products: Product[];
     selectedCategory: string;
     onChange: (category: string) => void;
 }
 
 export function CategoryFilter({
     categories,
-    products,
     selectedCategory,
     onChange,
 }: CategoryFilterProps) {
-    const getProductCount = (category: string) => 
-        products.filter((product) => product.category === category).length;
-
     const getButtonClass = (isActive: boolean, isDisabled = false) => 
         `shrink-0 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
             isDisabled
@@ -29,7 +22,7 @@ export function CategoryFilter({
 
     const formatCategory = (category: string) => 
         category 
-            .replaceAll('-', '')
+            .replaceAll('-', ' ')
             .replace(/\b\w/g, (char) => char.toUpperCase());
 
     return (
@@ -43,12 +36,10 @@ export function CategoryFilter({
                 className={getButtonClass(selectedCategory === '')}
                 aria-pressed={selectedCategory === ''}
             >
-                All ({products.length})
+                All
             </button>
 
             {categories.map((category) => {
-                const productCount = getProductCount(category);
-                const isDisabled = productCount === 0;
                 const isActive = selectedCategory === category;
 
                 return (
@@ -56,11 +47,10 @@ export function CategoryFilter({
                         key={category}
                         type="button"
                         onClick={() => onChange(category)}
-                        disabled={isDisabled}
-                        className={getButtonClass(isActive, isDisabled)}
+                        className={getButtonClass(isActive)}
                         aria-pressed={isActive}
                     >
-                        {formatCategory(category)} ({productCount})
+                        {formatCategory(category)}
                     </button>
                 );
             })}

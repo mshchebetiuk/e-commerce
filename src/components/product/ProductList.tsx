@@ -1,7 +1,10 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 import { Product } from '@/types/product';
+
 import { ProductGrid } from './ProductGrid';
 import { SearchBar } from '../filters/SearchBar';
 import { useDebounce } from '@/hooks/useDebounce';
@@ -16,6 +19,7 @@ interface ProductListProps {
     total: number;
     currentPage: number;
     limit: number;
+    selectedCategory: string;
 }
 
 export function ProductList({
@@ -24,47 +28,54 @@ export function ProductList({
     total,
     currentPage,
     limit,
+    selectedCategory,
 }: ProductListProps) {
+    const router = useRouter();
+
     const [search, setSearch] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('');
     const [sortBy, setSortBy] = useState<SortOption>('default');
 
     const debouncedSearch = useDebounce(search, 400);
 
     const filteredProducts = useMemo(() => {
-        const filtered = products.filter((product) => {
-            const matchesSearch = product
-                .title
+        const filtered = products.filter((product) =>
+            product.title 
                 .toLowerCase()
-                .includes(debouncedSearch.toLowerCase());
-
-            const matchesCategory = 
-                selectedCategory === '' || 
-                product.category === selectedCategory;
-
-            return matchesSearch && matchesCategory;
-        });
+                .includes(debouncedSearch.toLowerCase())
+        );
 
         switch (sortBy) {
             case 'price-asc':
                 return [...filtered].sort((a, b) => a.price - b.price);
+
             case 'price-desc':
                 return [...filtered].sort((a, b) => b.price - a.price);
+
             case 'rating':
                 return [...filtered].sort((a, b) => b.rating - a.rating);
+
             case 'title':
                 return [...filtered].sort((a, b) =>
                     a.title.localeCompare(b.title)
                 );
+
             default: 
                 return filtered;
         }
     }, [
         products, 
         debouncedSearch, 
-        selectedCategory, 
-        sortBy
+        sortBy,
     ]);
+
+    const handleCategoryChange = (category: string) => {
+        const params = new URLSearchParams();
+
+        if (category) params.set('category', category);
+        params.set('page', '1');
+
+        router.push(`/products?${params.toString()}`);
+    };
 
     return (
         <>
@@ -82,9 +93,8 @@ export function ProductList({
 
             <CategoryFilter 
                 categories={categories}
-                products={products}
                 selectedCategory={selectedCategory}
-                onChange={setSelectedCategory}
+                onChange={handleCategoryChange}
             />
 
             {filteredProducts.length === 0 ? (
@@ -103,6 +113,7 @@ export function ProductList({
                         currentPage={currentPage}
                         total={total}
                         limit={limit}
+                        category={selectedCategory}
                     />
                 </>
             )}

@@ -1,25 +1,43 @@
-import { getCategories, getProducts } from '@/services/api';
+import { 
+    getCategories, 
+    getProducts, 
+    getProductsByCategory
+} from '@/services/api';
+
 import { ProductList } from '@/components/product/ProductList';
 
 interface Props {
     searchParams: Promise<{
         page?: string;
+        category?: string;
     }>;
 }
 
 export default async function ProductsPage({
     searchParams,
 }: Props) {
-    const { page } = await searchParams;
+    const { page, category } = await searchParams;
 
-    const currentPage = Number(page ?? '1');
+    const parsedPage = Number(page ?? '1');
+    const currentPage =
+        Number.isInteger(parsedPage) && parsedPage > 0
+            ? parsedPage
+            : 1;
+
+    const selectedCategory = category ?? '';
+
     const limit = 12;
     const skip = (currentPage - 1) * limit;
 
-    const [{ products, total }, categories] = await Promise.all([
-        getProducts(limit, skip),
+    const [productsResponse, categories] = await Promise.all([
+        selectedCategory
+            ? getProductsByCategory(selectedCategory, limit, skip)
+            : getProducts(limit, skip),
+
         getCategories(),
     ]);
+
+    const { products, total } = productsResponse;
 
     return (
         <main className="mx-auto max-w-7xl px-4 py-10">
@@ -33,6 +51,7 @@ export default async function ProductsPage({
                 total={total}
                 currentPage={currentPage}
                 limit={limit}
+                selectedCategory={selectedCategory}
             />
         </main>
     );
