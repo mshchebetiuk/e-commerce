@@ -6,8 +6,10 @@ export type SortOption =
     | 'default'
     | 'price-asc'
     | 'price-desc'
-    | 'rating'
-    | 'title';
+    | 'rating-asc'
+    | 'rating-desc'
+    | 'title-asc'
+    | 'title-desc';
 
 interface SortSelectProps {
     value: SortOption;
@@ -33,8 +35,12 @@ export function SortSelect({
                 <option value="default">Sort: Default</option>
                 <option value="price-asc">Price: Low {'>'} High</option>
                 <option value="price-desc">Price: High {'>'} Low</option>
-                <option value="rating">Rating: High {'>'} Low</option>
-                <option value="title">Name: A {'>'} Z</option>
+
+                <option value="rating-desc">Rating: High {'>'} Low</option>
+                <option value="rating-asc">Rating: Low {'>'} High</option>
+
+                <option value="title-asc">Name: A {'>'} Z</option>
+                <option value="title-desc">Name: Z {'>'} A</option>
             </select>
 
             <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs">

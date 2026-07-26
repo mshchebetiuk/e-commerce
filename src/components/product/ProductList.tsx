@@ -53,12 +53,19 @@ export function ProductList({
             case 'price-desc':
                 return [...products].sort((a, b) => b.price - a.price);
 
-            case 'rating':
+            case 'rating-asc':
+                return [...products].sort((a, b) => a.rating - b.rating);
+            
+            case 'rating-desc':
                 return [...products].sort((a, b) => b.rating - a.rating);
 
-            case 'title':
+            case 'title-asc':
                 return [...products].sort((a, b) =>
                     a.title.localeCompare(b.title)
+                );
+            case 'title-desc':
+                return [...products].sort((a, b) =>
+                    b.title.localeCompare(a.title)
                 );
 
             default: 
