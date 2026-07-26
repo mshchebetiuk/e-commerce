@@ -126,6 +126,7 @@ export function ProductList({
                         total={total}
                         limit={limit}
                         category={selectedCategory}
+                        search={searchQuery}
                     />
                 </>
             )}
