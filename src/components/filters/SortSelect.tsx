@@ -1,5 +1,7 @@
 'use client';
 
+import { ArrowUpDown } from 'lucide-react';
+
 export type SortOption = 
     | 'default'
     | 'price-asc'
@@ -17,16 +19,27 @@ export function SortSelect({
     onChange,
 }: SortSelectProps) {
     return (
-        <select 
-            value={value}
-            onChange={(e) => onChange(e.target.value as SortOption)}
-            className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 outline-none transition-colors focus:border-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
-        >
-            <option value="default">Default</option>
-            <option value="price-asc">Price: Low {'>'} High</option>
-            <option value="price-desc">Price: High {'>'} Low</option>
-            <option value="rating">Rating</option>
-            <option value="title">Name (A-Z)</option>
-        </select>
+        <div className="relative w-full sm:w-64">
+            <ArrowUpDown 
+                size={18}
+                className='pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-400'
+            />
+
+            <select 
+                value={value}
+                onChange={(e) => onChange(e.target.value as SortOption)}
+                className="h-12 w-full cursor-pointer appearance-none rounded-xl border border-gray-300 bg-white pl-11 pr-10 outline-none transition-colors focus:border-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+            >
+                <option value="default">Sort: Default</option>
+                <option value="price-asc">Price: Low {'>'} High</option>
+                <option value="price-desc">Price: High {'>'} Low</option>
+                <option value="rating">Rating: High {'>'} Low</option>
+                <option value="title">Name: A {'>'} Z</option>
+            </select>
+
+            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs">
+                ▼
+            </span>
+        </div>
     );
 }

@@ -57,3 +57,22 @@ export async function getProduct(id: number): Promise<Product | null> {
         return null;
     }
 }
+
+export async function searchProducts(
+    query: string, 
+    limit = 12, 
+    skip = 0,
+): Promise<ProductsResponse> {
+    const { data } = await api.get<ProductsResponse>(
+        '/products/search',
+        {
+            params: {
+                q: query, 
+                limit, 
+                skip,
+            },
+        }
+    );
+
+    return data;
+}

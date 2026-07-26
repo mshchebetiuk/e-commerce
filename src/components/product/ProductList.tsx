@@ -7,7 +7,7 @@ import { Product } from '@/types/product';
 
 import { ProductGrid } from './ProductGrid';
 import { SearchBar } from '../filters/SearchBar';
-import { useDebounce } from '@/hooks/useDebounce';
+// import { useDebounce } from '@/hooks/useDebounce';
 import { CategoryFilter } from '../filters/CategoryFilter';
 import { SortOption, SortSelect } from '../filters/SortSelect';
 import { Pagination } from './Pagination';
@@ -20,6 +20,7 @@ interface ProductListProps {
     currentPage: number;
     limit: number;
     selectedCategory: string;
+    searchQuery: string;
 }
 
 export function ProductList({
@@ -29,42 +30,42 @@ export function ProductList({
     currentPage,
     limit,
     selectedCategory,
+    searchQuery,
 }: ProductListProps) {
     const router = useRouter();
-
-    const [search, setSearch] = useState('');
     const [sortBy, setSortBy] = useState<SortOption>('default');
 
-    const debouncedSearch = useDebounce(search, 400);
+    const handleSearch = (query: string) => {
+        const params = new URLSearchParams();
 
-    const filteredProducts = useMemo(() => {
-        const filtered = products.filter((product) =>
-            product.title 
-                .toLowerCase()
-                .includes(debouncedSearch.toLowerCase())
-        );
+        if (query) params.set('search', query);
+        if (selectedCategory) params.set('category', selectedCategory);
 
+        params.set('page', '1');
+        router.push(`/products?${params.toString()}`);
+    }
+
+    const sortedProducts = useMemo(() => {
         switch (sortBy) {
             case 'price-asc':
-                return [...filtered].sort((a, b) => a.price - b.price);
+                return [...products].sort((a, b) => a.price - b.price);
 
             case 'price-desc':
-                return [...filtered].sort((a, b) => b.price - a.price);
+                return [...products].sort((a, b) => b.price - a.price);
 
             case 'rating':
-                return [...filtered].sort((a, b) => b.rating - a.rating);
+                return [...products].sort((a, b) => b.rating - a.rating);
 
             case 'title':
-                return [...filtered].sort((a, b) =>
+                return [...products].sort((a, b) =>
                     a.title.localeCompare(b.title)
                 );
 
             default: 
-                return filtered;
+                return products;
         }
     }, [
-        products, 
-        debouncedSearch, 
+        products,
         sortBy,
     ]);
 
@@ -72,6 +73,8 @@ export function ProductList({
         const params = new URLSearchParams();
 
         if (category) params.set('category', category);
+        if (searchQuery) params.set('search', searchQuery);
+
         params.set('page', '1');
 
         router.push(`/products?${params.toString()}`);
@@ -79,11 +82,13 @@ export function ProductList({
 
     return (
         <>
-            <div className="mb-8 space-y-4">
-                <SearchBar 
-                    value={search} 
-                    onChange={setSearch} 
-                />
+            <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center">
+                <div className="flex-1">
+                    <SearchBar 
+                        initialValue={searchQuery} 
+                        onSearch={handleSearch} 
+                    />
+                </div>
 
                 <SortSelect 
                     value={sortBy}
@@ -97,7 +102,7 @@ export function ProductList({
                 onChange={handleCategoryChange}
             />
 
-            {filteredProducts.length === 0 ? (
+            {sortedProducts.length === 0 ? (
                 <EmptyState 
                     icon="📦"
                     title="No products found"
@@ -107,7 +112,7 @@ export function ProductList({
                 />
             ) : (
                 <>
-                    <ProductGrid products={filteredProducts} />
+                    <ProductGrid products={sortedProducts} />
         
                     <Pagination 
                         currentPage={currentPage}

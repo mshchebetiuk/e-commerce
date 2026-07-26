@@ -1,7 +1,8 @@
 import { 
     getCategories, 
     getProducts, 
-    getProductsByCategory
+    getProductsByCategory,
+    searchProducts,
 } from '@/services/api';
 
 import { ProductList } from '@/components/product/ProductList';
@@ -16,13 +17,14 @@ interface Props {
     searchParams: Promise<{
         page?: string;
         category?: string;
+        search?: string;
     }>;
 }
 
 export default async function ProductsPage({
     searchParams,
 }: Props) {
-    const { page, category } = await searchParams;
+    const { page, category, search } = await searchParams;
 
     const parsedPage = Number(page ?? '1');
     const currentPage =
@@ -31,14 +33,21 @@ export default async function ProductsPage({
             : 1;
 
     const selectedCategory = category ?? '';
+    const searchQuery = search?.trim() ?? '';
 
     const limit = 12;
     const skip = (currentPage - 1) * limit;
 
     const [productsResponse, categories] = await Promise.all([
-        selectedCategory
-            ? getProductsByCategory(selectedCategory, limit, skip)
-            : getProducts(limit, skip),
+        searchQuery 
+            ? searchProducts(searchQuery, limit, skip)
+            : selectedCategory
+                ? getProductsByCategory(
+                    selectedCategory,
+                    limit, 
+                    skip,
+                )
+                : getProducts(limit, skip),
 
         getCategories(),
     ]);
@@ -58,6 +67,7 @@ export default async function ProductsPage({
                 currentPage={currentPage}
                 limit={limit}
                 selectedCategory={selectedCategory}
+                searchQuery={searchQuery}
             />
         </main>
     );
